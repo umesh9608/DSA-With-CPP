@@ -42,3 +42,11 @@ int main(){
   cout<<sum_pos(arr,6,sum,0,total);
   return 0;
 }
+//1.  kuch pal ki khushi or mahino br ki tension
+//2. hr barr mood ke naam pe bahar khana (insaan hr khushi turant nhi kharidta)
+//3 ase logo pr kharch jo apki kadar nhi kre
+//faltu khardari
+//bhanawo me kherch krna
+//paisa sirf kagag nhi hota aha apki mahnet hai apka samay hai apki aajadi hai apki santi hai esliye jaruri chije pr kharch kro sikhne pr kharch kr maa baap pe kharch kro apne swath pr kharch kro palki sirf dikaye or aadto ke liye apni jindji ki kamai mat udawo
+
+//hr gagha dildar bnana samjhadari nhi hoti kuch gajga pr kanjus bnana hi insaan ko fiture me majbut bnata hai
