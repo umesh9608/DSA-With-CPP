@@ -1,10 +1,61 @@
-/*MAKE THE ARRAY BEAUTIFUL
-Given an array of negative and non-negative integers. You have to make the array beautiful. An array is beautiful if two adjacent integers, arr[i] and arr[i+1] are either negative or non-negitive. And you can do the following operation any number of times untill the array becomes beautiful.
-. If two adjecent integers are different i.e one of them is negative and other is non-negative, remove them.
-Return the beautiful array after performing the above operation.
-Note:An emepty array is also a beautiful arrray. There can be many adjacent integers which are diffenent as stated above. So remove different adjacent integers as described above from left to*/
+/*
+MAKE THE ARRAY BEAUTIFUL
+*/
 
 #include<iostream>
 #include<stack>
 #include<vector>
+#include<algorithm>   // for reverse()
+
 using namespace std;
+
+vector<int> makeBeautiful(vector<int>& arr){
+
+    stack<int> s;
+
+    int i=0;
+
+    while(i < arr.size()){
+
+        if(!s.empty()){
+
+            if((s.top() >= 0 && arr[i] < 0) ||
+               (s.top() < 0 && arr[i] >= 0)){
+                s.pop();
+            }
+            else{
+                s.push(arr[i]);
+            }
+
+        }
+        else{
+            s.push(arr[i]);
+        }
+
+        i++;
+    }
+
+    vector<int> ans;
+
+    while(!s.empty()){
+        ans.push_back(s.top());
+        s.pop();
+    }
+
+    reverse(ans.begin(), ans.end());
+
+    return ans;
+}
+
+int main(){
+
+    vector<int> arr={4,-2,-1,3};
+
+    vector<int> result=makeBeautiful(arr);
+
+    for(int x:result){
+        cout<<x<<" ";
+    }
+
+    return 0;
+}
