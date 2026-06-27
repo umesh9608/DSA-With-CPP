@@ -12,17 +12,6 @@ in 1 unit of time.
 
 Find minimum time required to rot all oranges.
 If impossible, return -1.
-
-Example:
-Input:
-grid = {
-    {0,1,2},
-    {0,1,2},
-    {2,1,1}
-}
-
-Output:
-1
 */
 
 #include <iostream>
@@ -35,16 +24,15 @@ bool check(int i, int j, int row, int col)
     return (i >= 0 && i < row && j >= 0 && j < col);
 }
 
-int orangeRotting(vector<vector<int>>& grid)
+int orangeRotting(vector<vector<int> >& grid)
 {
     int n = grid.size();
     int m = grid[0].size();
 
     int goodOrange = 0;
+    queue<pair<pair<int, int>, int> > q;
 
-    queue<pair<pair<int, int>, int>> q;
-
-    // Count fresh oranges + push rotten oranges
+    // Count fresh oranges and push rotten oranges
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
@@ -52,7 +40,7 @@ int orangeRotting(vector<vector<int>>& grid)
             if (grid[i][j] == 1)
                 goodOrange++;
             else if (grid[i][j] == 2)
-                q.push({{i, j}, 0});
+                q.push(make_pair(make_pair(i, j), 0));
         }
     }
 
@@ -70,7 +58,7 @@ int orangeRotting(vector<vector<int>>& grid)
         {
             grid[i - 1][j] = 2;
             goodOrange--;
-            q.push({{i - 1, j}, timer + 1});
+            q.push(make_pair(make_pair(i - 1, j), timer + 1));
         }
 
         // Down
@@ -78,7 +66,7 @@ int orangeRotting(vector<vector<int>>& grid)
         {
             grid[i + 1][j] = 2;
             goodOrange--;
-            q.push({{i + 1, j}, timer + 1});
+            q.push(make_pair(make_pair(i + 1, j), timer + 1));
         }
 
         // Left
@@ -86,7 +74,7 @@ int orangeRotting(vector<vector<int>>& grid)
         {
             grid[i][j - 1] = 2;
             goodOrange--;
-            q.push({{i, j - 1}, timer + 1});
+            q.push(make_pair(make_pair(i, j - 1), timer + 1));
         }
 
         // Right
@@ -94,23 +82,34 @@ int orangeRotting(vector<vector<int>>& grid)
         {
             grid[i][j + 1] = 2;
             goodOrange--;
-            q.push({{i, j + 1}, timer + 1});
+            q.push(make_pair(make_pair(i, j + 1), timer + 1));
         }
     }
 
     if (goodOrange > 0)
         return -1;
-    else
-        return timer;
+
+    return timer;
 }
 
 int main()
 {
-    vector<vector<int>> grid = {
-        {0, 1, 2},
-        {0, 1, 2},
-        {2, 1, 1}
-    };
+    vector<vector<int> > grid;
+
+    grid.push_back(vector<int>());
+    grid[0].push_back(0);
+    grid[0].push_back(1);
+    grid[0].push_back(2);
+
+    grid.push_back(vector<int>());
+    grid[1].push_back(0);
+    grid[1].push_back(1);
+    grid[1].push_back(2);
+
+    grid.push_back(vector<int>());
+    grid[2].push_back(2);
+    grid[2].push_back(1);
+    grid[2].push_back(1);
 
     cout << orangeRotting(grid);
 
